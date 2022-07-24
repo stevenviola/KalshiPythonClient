@@ -26,7 +26,7 @@ Name | Type | Description | Notes
 **previous_yes_bid** | **int** |  | [optional] 
 **recent_volume** | **int** |  | [optional] 
 **result** | **str** |  | [optional] 
-**rulebook_variables** | **{str: (str,)}** |  | [optional] 
+**rulebook_variables** | **{str: (str,)}, none_type** |  | [optional] 
 **status** | **str** |  | [optional] 
 **sub_title** | **str** |  | [optional] 
 **ticker_name** | **str** |  | [optional] 

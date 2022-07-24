@@ -103,7 +103,7 @@ class EventChildMarket(ModelNormal):
             'previous_yes_bid': (int,),  # noqa: E501
             'recent_volume': (int,),  # noqa: E501
             'result': (str,),  # noqa: E501
-            'rulebook_variables': ({str: (str,)},),  # noqa: E501
+            'rulebook_variables': ({str: (str,)}, none_type,),  # noqa: E501
             'status': (str,),  # noqa: E501
             'sub_title': (str,),  # noqa: E501
             'ticker_name': (str,),  # noqa: E501
@@ -214,7 +214,7 @@ class EventChildMarket(ModelNormal):
             previous_yes_bid (int): [optional]  # noqa: E501
             recent_volume (int): [optional]  # noqa: E501
             result (str): [optional]  # noqa: E501
-            rulebook_variables ({str: (str,)}): [optional]  # noqa: E501
+            rulebook_variables ({str: (str,)}, none_type): [optional]  # noqa: E501
             status (str): [optional]  # noqa: E501
             sub_title (str): [optional]  # noqa: E501
             ticker_name (str): [optional]  # noqa: E501
@@ -329,7 +329,7 @@ class EventChildMarket(ModelNormal):
             previous_yes_bid (int): [optional]  # noqa: E501
             recent_volume (int): [optional]  # noqa: E501
             result (str): [optional]  # noqa: E501
-            rulebook_variables ({str: (str,)}): [optional]  # noqa: E501
+            rulebook_variables ({str: (str,)}, none_type): [optional]  # noqa: E501
             status (str): [optional]  # noqa: E501
             sub_title (str): [optional]  # noqa: E501
             ticker_name (str): [optional]  # noqa: E501

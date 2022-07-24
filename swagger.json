@@ -4235,6 +4235,7 @@
               "type": "string"
             },
             "type": "object",
+            "nullable": true,
             "x-go-name": "RulebookVariables"
           },
           "status": {
@@ -4817,6 +4818,7 @@
             },
             "description": "You should not assume a fixed structure for this field. It is subject to change from market to market.",
             "type": "object",
+            "nullable": true,
             "x-go-name": "RulebookVariables"
           },
           "settle_details": {

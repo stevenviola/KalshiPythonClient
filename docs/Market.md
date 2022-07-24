@@ -39,7 +39,7 @@ Name | Type | Description | Notes
 **ranged_group_ticker** | **str** |  | [optional] 
 **recent_volume** | **int** |  | [optional] 
 **result** | **str** |  | [optional] 
-**rulebook_variables** | **{str: (str,)}** | You should not assume a fixed structure for this field. It is subject to change from market to market. | [optional] 
+**rulebook_variables** | **{str: (str,)}, none_type** | You should not assume a fixed structure for this field. It is subject to change from market to market. | [optional] 
 **settle_details** | **str** |  | [optional] 
 **settlement_sources** | [**[SettlementSource]**](SettlementSource.md) |  | [optional] 
 **status** | **str** |  | [optional] 

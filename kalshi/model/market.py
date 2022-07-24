@@ -121,7 +121,7 @@ class Market(ModelNormal):
             'ranged_group_ticker': (str,),  # noqa: E501
             'recent_volume': (int,),  # noqa: E501
             'result': (str,),  # noqa: E501
-            'rulebook_variables': ({str: (str,)},),  # noqa: E501
+            'rulebook_variables': ({str: (str,)}, none_type,),  # noqa: E501
             'settle_details': (str,),  # noqa: E501
             'settlement_sources': ([SettlementSource],),  # noqa: E501
             'status': (str,),  # noqa: E501
@@ -266,7 +266,7 @@ class Market(ModelNormal):
             ranged_group_ticker (str): [optional]  # noqa: E501
             recent_volume (int): [optional]  # noqa: E501
             result (str): [optional]  # noqa: E501
-            rulebook_variables ({str: (str,)}): You should not assume a fixed structure for this field. It is subject to change from market to market.. [optional]  # noqa: E501
+            rulebook_variables ({str: (str,)}, none_type): You should not assume a fixed structure for this field. It is subject to change from market to market.. [optional]  # noqa: E501
             settle_details (str): [optional]  # noqa: E501
             settlement_sources ([SettlementSource]): [optional]  # noqa: E501
             status (str): [optional]  # noqa: E501
@@ -398,7 +398,7 @@ class Market(ModelNormal):
             ranged_group_ticker (str): [optional]  # noqa: E501
             recent_volume (int): [optional]  # noqa: E501
             result (str): [optional]  # noqa: E501
-            rulebook_variables ({str: (str,)}): You should not assume a fixed structure for this field. It is subject to change from market to market.. [optional]  # noqa: E501
+            rulebook_variables ({str: (str,)}, none_type): You should not assume a fixed structure for this field. It is subject to change from market to market.. [optional]  # noqa: E501
             settle_details (str): [optional]  # noqa: E501
             settlement_sources ([SettlementSource]): [optional]  # noqa: E501
             status (str): [optional]  # noqa: E501
