@@ -19,6 +19,7 @@ End-point to start a rest session with Kalshi.
 
 ### Example
 
+
 ```python
 import time
 import kalshi
@@ -74,6 +75,7 @@ No authorization required
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** |  |  * Set-Cookie - Access token is set on a cookie named &#39;sessions&#39; as well <br>  |
@@ -95,6 +97,7 @@ End-point to terminates your session with Kalshi.
 ### Example
 
 * Api Key Authentication (cookie):
+
 ```python
 import time
 import kalshi
@@ -149,6 +152,7 @@ void (empty response body)
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **204** | No fields are returned on the response. |  -  |
@@ -168,6 +172,7 @@ ResetPassword
 End-point to request a password reset email link.  To be used in case you forget your password.
 
 ### Example
+
 
 ```python
 import time
@@ -221,6 +226,7 @@ No authorization required
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **202** | No fields are returned on the response. |  -  |
@@ -238,6 +244,7 @@ ResetPasswordConfirm
 End-point to finish the password reset flow.  The code param on the path should be filled with the verification code sent by email.
 
 ### Example
+
 
 ```python
 import time
@@ -301,6 +308,7 @@ No authorization required
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **204** | No fields are returned on the response. |  -  |

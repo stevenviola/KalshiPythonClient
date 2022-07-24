@@ -10,6 +10,8 @@ Name | Type | Description | Notes
 **created_ts** | **datetime** |  | [optional] 
 **deposit_type** | **str** |  | [optional] 
 **id** | **str** |  | [optional] 
+**immediate_amount** | **int** |  | [optional] 
+**immediate_status** | **str** |  | [optional] 
 **return_code** | **str** |  | [optional] 
 **return_reason** | **str** |  | [optional] 
 **status** | **str** |  | [optional] 

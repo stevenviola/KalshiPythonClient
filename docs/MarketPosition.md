@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **fees_paid** | **int** |  | [optional] 
 **final_position** | **int** | Settlement stats | [optional] 
 **final_position_cost** | **int** |  | [optional] 
+**is_settled** | **bool** |  | [optional] 
 **market_id** | **str** |  | [optional] 
 **position** | **int** | Current stats | [optional] 
 **position_cost** | **int** |  | [optional] 

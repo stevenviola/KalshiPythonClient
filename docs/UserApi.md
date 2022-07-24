@@ -4,20 +4,110 @@ All URIs are relative to *https://trading-api.kalshi.com/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**user_add_favorited_series**](UserApi.md#user_add_favorited_series) | **PUT** /users/{user_id}/favorited_series/{series_ticker} | UserAddFavoritedSeries
 [**user_add_watchlist**](UserApi.md#user_add_watchlist) | **PUT** /users/{user_id}/watchlist/{market_id} | UserAddWatchlist
+[**user_batch_orders_cancel**](UserApi.md#user_batch_orders_cancel) | **DELETE** /users/{user_id}/batch_orders | UserBatchOrdersCancel
+[**user_batch_orders_create**](UserApi.md#user_batch_orders_create) | **POST** /users/{user_id}/batch_orders | UserBatchOrdersCreate
 [**user_change_password**](UserApi.md#user_change_password) | **PUT** /users/{user_id}/password | UserChangePassword
+[**user_deactivate**](UserApi.md#user_deactivate) | **DELETE** /users | UserDeactivate
 [**user_get_balance**](UserApi.md#user_get_balance) | **GET** /users/{user_id}/balance | UserGetBalance
+[**user_get_favorited_series**](UserApi.md#user_get_favorited_series) | **GET** /users/{user_id}/favorited_series | UserGetFavoritedSeries
 [**user_get_market_position**](UserApi.md#user_get_market_position) | **GET** /users/{user_id}/positions/{market_id} | UserGetMarketPosition
 [**user_get_market_positions**](UserApi.md#user_get_market_positions) | **GET** /users/{user_id}/positions | UserGetMarketPositions
 [**user_get_profile**](UserApi.md#user_get_profile) | **GET** /users/{user_id} | UserGetProfile
+[**user_get_referral_info**](UserApi.md#user_get_referral_info) | **GET** /users/{user_id}/referrals | UserGetReferralInfo
 [**user_get_watchlist**](UserApi.md#user_get_watchlist) | **GET** /users/{user_id}/watchlist | UserGetWatchlist
 [**user_order_cancel**](UserApi.md#user_order_cancel) | **DELETE** /users/{user_id}/orders/{order_id} | UserOrderCancel
 [**user_order_create**](UserApi.md#user_order_create) | **POST** /users/{user_id}/orders | UserOrderCreate
 [**user_order_decrease**](UserApi.md#user_order_decrease) | **POST** /users/{user_id}/orders/{order_id}/decrease | UserOrderDecrease
 [**user_orders_get**](UserApi.md#user_orders_get) | **GET** /users/{user_id}/orders | UserOrdersGet
+[**user_remove_favorited_series**](UserApi.md#user_remove_favorited_series) | **DELETE** /users/{user_id}/favorited_series/{series_ticker} | UserRemoveFavoritedSeries
 [**user_remove_watchlist**](UserApi.md#user_remove_watchlist) | **DELETE** /users/{user_id}/watchlist/{market_id} | UserRemoveWatchlist
 [**user_trades_get**](UserApi.md#user_trades_get) | **GET** /users/{user_id}/trades | UserTradesGet
 
+
+# **user_add_favorited_series**
+> user_add_favorited_series(user_id, series_ticker)
+
+UserAddFavoritedSeries
+
+End-point for adding a series to the logged in user's favorites.  The value for the user_id path parameter should match the user_id value returned on the response for the last login request (POST /log_in).  The value for the series_ticker path parameter should match the ticker value of the series to be added.
+
+### Example
+
+* Api Key Authentication (cookie):
+
+```python
+import time
+import kalshi
+from kalshi.api import user_api
+from pprint import pprint
+# Defining the host is optional and defaults to https://trading-api.kalshi.com/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kalshi.Configuration(
+    host = "https://trading-api.kalshi.com/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookie
+configuration.api_key['cookie'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookie'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with kalshi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = user_api.UserApi(api_client)
+    user_id = "user_id_example" # str | user_id should be filled with your user_id provided on log_in
+    series_ticker = "series_ticker_example" # str | series_ticker should be filled with the ticker of the series to be added to the list
+
+    # example passing only required values which don't have defaults set
+    try:
+        # UserAddFavoritedSeries
+        api_instance.user_add_favorited_series(user_id, series_ticker)
+    except kalshi.ApiException as e:
+        print("Exception when calling UserApi->user_add_favorited_series: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **user_id** | **str**| user_id should be filled with your user_id provided on log_in |
+ **series_ticker** | **str**| series_ticker should be filled with the ticker of the series to be added to the list |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[cookie](../README.md#cookie)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | No fields are returned on the response. |  -  |
+**400** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
+**401** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
+**403** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
+**404** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
+**500** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **user_add_watchlist**
 > user_add_watchlist(user_id, market_id)
@@ -29,6 +119,7 @@ End-point for adding a market to the logged in user's watchlist.  The value for 
 ### Example
 
 * Api Key Authentication (cookie):
+
 ```python
 import time
 import kalshi
@@ -89,6 +180,7 @@ void (empty response body)
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **204** | No fields are returned on the response. |  -  |
@@ -97,6 +189,215 @@ void (empty response body)
 **403** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
 **404** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
 **500** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **user_batch_orders_cancel**
+> UserBatchOrdersCancelResponse user_batch_orders_cancel(user_id)
+
+UserBatchOrdersCancel
+
+End-point for cancelling multiple orders at once.  Each order in the batch is counted against the total rate limit for order operations. Consequently, the size of the batch is capped by the current per-second rate-limit configuration applicable to the user.  At the moment of writing, the limit is 30 orders per batch. Available to members with advanced access only.  The value for the user_id path parameter should match the user_id value returned on the response for the last login request (POST /log_in).
+
+### Example
+
+* Api Key Authentication (cookie):
+
+```python
+import time
+import kalshi
+from kalshi.api import user_api
+from kalshi.model.user_batch_orders_cancel_request import UserBatchOrdersCancelRequest
+from kalshi.model.user_batch_orders_cancel_response import UserBatchOrdersCancelResponse
+from pprint import pprint
+# Defining the host is optional and defaults to https://trading-api.kalshi.com/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kalshi.Configuration(
+    host = "https://trading-api.kalshi.com/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookie
+configuration.api_key['cookie'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookie'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with kalshi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = user_api.UserApi(api_client)
+    user_id = "user_id_example" # str | This parameter should be filled with your user_id provided on log_in
+    user_batch_orders_cancel_request = UserBatchOrdersCancelRequest(
+        ids=[
+            "ids_example",
+        ],
+    ) # UserBatchOrdersCancelRequest | Orders cancel input data (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # UserBatchOrdersCancel
+        api_response = api_instance.user_batch_orders_cancel(user_id)
+        pprint(api_response)
+    except kalshi.ApiException as e:
+        print("Exception when calling UserApi->user_batch_orders_cancel: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # UserBatchOrdersCancel
+        api_response = api_instance.user_batch_orders_cancel(user_id, user_batch_orders_cancel_request=user_batch_orders_cancel_request)
+        pprint(api_response)
+    except kalshi.ApiException as e:
+        print("Exception when calling UserApi->user_batch_orders_cancel: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **user_id** | **str**| This parameter should be filled with your user_id provided on log_in |
+ **user_batch_orders_cancel_request** | [**UserBatchOrdersCancelRequest**](UserBatchOrdersCancelRequest.md)| Orders cancel input data | [optional]
+
+### Return type
+
+[**UserBatchOrdersCancelResponse**](UserBatchOrdersCancelResponse.md)
+
+### Authorization
+
+[cookie](../README.md#cookie)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** |  |  -  |
+**400** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
+**401** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
+**403** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
+**500** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
+**503** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **user_batch_orders_create**
+> UserBatchOrdersCreateResponse user_batch_orders_create(user_id)
+
+UserBatchOrdersCreate
+
+Endpoint for submitting a batch of orders.  Each order in the batch is counted against the total rate limit for order operations. Consequently, the size of the batch is capped by the current per-second rate-limit configuration applicable to the user.  At the moment of writing, the limit is 30 orders per batch. Available to members with advanced access only.  The value for the user_id path parameter should match the user_id value returned on the response for the last login request (POST /log_in).
+
+### Example
+
+* Api Key Authentication (cookie):
+
+```python
+import time
+import kalshi
+from kalshi.api import user_api
+from kalshi.model.user_batch_orders_create_request import UserBatchOrdersCreateRequest
+from kalshi.model.user_batch_orders_create_response import UserBatchOrdersCreateResponse
+from pprint import pprint
+# Defining the host is optional and defaults to https://trading-api.kalshi.com/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kalshi.Configuration(
+    host = "https://trading-api.kalshi.com/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookie
+configuration.api_key['cookie'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookie'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with kalshi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = user_api.UserApi(api_client)
+    user_id = "user_id_example" # str | This parameter should be filled with your user_id provided on log_in
+    user_batch_orders_create_request = UserBatchOrdersCreateRequest(
+        orders=[
+            UserOrderCreateRequest(
+                count=1,
+                expiration_unix_ts=1,
+                market_id="market_id_example",
+                max_cost_cents=1,
+                order_action="order_action_example",
+                order_type="order_type_example",
+                price=1,
+                sell_position_capped=True,
+                side="side_example",
+                user_side="user_side_example",
+            ),
+        ],
+    ) # UserBatchOrdersCreateRequest | Order create input data (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # UserBatchOrdersCreate
+        api_response = api_instance.user_batch_orders_create(user_id)
+        pprint(api_response)
+    except kalshi.ApiException as e:
+        print("Exception when calling UserApi->user_batch_orders_create: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # UserBatchOrdersCreate
+        api_response = api_instance.user_batch_orders_create(user_id, user_batch_orders_create_request=user_batch_orders_create_request)
+        pprint(api_response)
+    except kalshi.ApiException as e:
+        print("Exception when calling UserApi->user_batch_orders_create: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **user_id** | **str**| This parameter should be filled with your user_id provided on log_in |
+ **user_batch_orders_create_request** | [**UserBatchOrdersCreateRequest**](UserBatchOrdersCreateRequest.md)| Order create input data | [optional]
+
+### Return type
+
+[**UserBatchOrdersCreateResponse**](UserBatchOrdersCreateResponse.md)
+
+### Authorization
+
+[cookie](../README.md#cookie)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** |  |  -  |
+**400** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
+**401** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
+**403** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
+**500** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
+**503** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -110,6 +411,7 @@ End-point for updating logged-in user password.  The value for the user_id path 
 ### Example
 
 * Api Key Authentication (cookie):
+
 ```python
 import time
 import kalshi
@@ -182,12 +484,78 @@ void (empty response body)
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **204** | No fields are returned on the response. |  -  |
 **400** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
 **401** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
 **403** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
+**500** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **user_deactivate**
+> CreateUserResponse user_deactivate()
+
+UserDeactivate
+
+End-point for deactivating an user. A call to this end-point deactivates the current user and ends the current session.
+
+### Example
+
+
+```python
+import time
+import kalshi
+from kalshi.api import user_api
+from kalshi.model.create_user_response import CreateUserResponse
+from pprint import pprint
+# Defining the host is optional and defaults to https://trading-api.kalshi.com/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kalshi.Configuration(
+    host = "https://trading-api.kalshi.com/v1"
+)
+
+
+# Enter a context with an instance of the API client
+with kalshi.ApiClient() as api_client:
+    # Create an instance of the API class
+    api_instance = user_api.UserApi(api_client)
+
+    # example, this endpoint has no required or optional parameters
+    try:
+        # UserDeactivate
+        api_response = api_instance.user_deactivate()
+        pprint(api_response)
+    except kalshi.ApiException as e:
+        print("Exception when calling UserApi->user_deactivate: %s\n" % e)
+```
+
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**CreateUserResponse**](CreateUserResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**201** |  |  -  |
+**400** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
 **500** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -202,6 +570,7 @@ End-point for getting the balance of the logged in user.  The value for the user
 ### Example
 
 * Api Key Authentication (cookie):
+
 ```python
 import time
 import kalshi
@@ -262,6 +631,89 @@ Name | Type | Description  | Notes
 
 
 ### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** |  |  -  |
+**400** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
+**401** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
+**403** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
+**500** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **user_get_favorited_series**
+> UserGetFavoritedSeriesResponse user_get_favorited_series(user_id)
+
+UserGetFavoritedSeries
+
+End-point for getting the favorited series for the logged in user.  The value for the user_id path parameter should match the user_id value returned on the response for the last login request (POST /log_in).
+
+### Example
+
+* Api Key Authentication (cookie):
+
+```python
+import time
+import kalshi
+from kalshi.api import user_api
+from kalshi.model.user_get_favorited_series_response import UserGetFavoritedSeriesResponse
+from pprint import pprint
+# Defining the host is optional and defaults to https://trading-api.kalshi.com/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kalshi.Configuration(
+    host = "https://trading-api.kalshi.com/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookie
+configuration.api_key['cookie'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookie'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with kalshi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = user_api.UserApi(api_client)
+    user_id = "user_id_example" # str | user_id should be filled with your user_id provided on log_in
+
+    # example passing only required values which don't have defaults set
+    try:
+        # UserGetFavoritedSeries
+        api_response = api_instance.user_get_favorited_series(user_id)
+        pprint(api_response)
+    except kalshi.ApiException as e:
+        print("Exception when calling UserApi->user_get_favorited_series: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **user_id** | **str**| user_id should be filled with your user_id provided on log_in |
+
+### Return type
+
+[**UserGetFavoritedSeriesResponse**](UserGetFavoritedSeriesResponse.md)
+
+### Authorization
+
+[cookie](../README.md#cookie)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** |  |  -  |
@@ -282,6 +734,7 @@ End-point for getting the market positions for the logged in user, in a specific
 ### Example
 
 * Api Key Authentication (cookie):
+
 ```python
 import time
 import kalshi
@@ -344,6 +797,7 @@ Name | Type | Description  | Notes
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** |  |  -  |
@@ -365,6 +819,7 @@ End-point for getting all market positions for the logged in user.  The value fo
 ### Example
 
 * Api Key Authentication (cookie):
+
 ```python
 import time
 import kalshi
@@ -425,6 +880,7 @@ Name | Type | Description  | Notes
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** |  |  -  |
@@ -445,6 +901,7 @@ End-point for retrieving the logged in user's profile.  The value for the user_i
 ### Example
 
 * Api Key Authentication (cookie):
+
 ```python
 import time
 import kalshi
@@ -505,6 +962,7 @@ Name | Type | Description  | Notes
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** |  |  -  |
@@ -513,6 +971,75 @@ Name | Type | Description  | Notes
 **403** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
 **500** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
 **503** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **user_get_referral_info**
+> UserGetReferralInfoResponse user_get_referral_info(user_id)
+
+UserGetReferralInfo
+
+End-point for getting all information related to a member's referral status.
+
+### Example
+
+
+```python
+import time
+import kalshi
+from kalshi.api import user_api
+from kalshi.model.user_get_referral_info_response import UserGetReferralInfoResponse
+from pprint import pprint
+# Defining the host is optional and defaults to https://trading-api.kalshi.com/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kalshi.Configuration(
+    host = "https://trading-api.kalshi.com/v1"
+)
+
+
+# Enter a context with an instance of the API client
+with kalshi.ApiClient() as api_client:
+    # Create an instance of the API class
+    api_instance = user_api.UserApi(api_client)
+    user_id = "user_id_example" # str | Should be filled with your user_id provided on log_in
+
+    # example passing only required values which don't have defaults set
+    try:
+        # UserGetReferralInfo
+        api_response = api_instance.user_get_referral_info(user_id)
+        pprint(api_response)
+    except kalshi.ApiException as e:
+        print("Exception when calling UserApi->user_get_referral_info: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **user_id** | **str**| Should be filled with your user_id provided on log_in |
+
+### Return type
+
+[**UserGetReferralInfoResponse**](UserGetReferralInfoResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** |  |  -  |
+**403** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
+**500** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -526,6 +1053,7 @@ End-point for getting the market watchlist for the logged in user.  The value fo
 ### Example
 
 * Api Key Authentication (cookie):
+
 ```python
 import time
 import kalshi
@@ -586,6 +1114,7 @@ Name | Type | Description  | Notes
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** |  |  -  |
@@ -606,6 +1135,7 @@ End-point for canceling orders.  The value for the user_id path parameter should
 ### Example
 
 * Api Key Authentication (cookie):
+
 ```python
 import time
 import kalshi
@@ -668,6 +1198,7 @@ Name | Type | Description  | Notes
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** |  |  -  |
@@ -689,6 +1220,7 @@ End-point for submitting orders in a market.  The value for the user_id path par
 ### Example
 
 * Api Key Authentication (cookie):
+
 ```python
 import time
 import kalshi
@@ -723,9 +1255,12 @@ with kalshi.ApiClient(configuration) as api_client:
         expiration_unix_ts=1,
         market_id="market_id_example",
         max_cost_cents=1,
+        order_action="order_action_example",
+        order_type="order_type_example",
         price=1,
         sell_position_capped=True,
         side="side_example",
+        user_side="user_side_example",
     ) # UserOrderCreateRequest | Order create input data (optional)
 
     # example passing only required values which don't have defaults set
@@ -769,6 +1304,7 @@ Name | Type | Description  | Notes
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **201** |  |  -  |
@@ -790,6 +1326,7 @@ End-point for decreasing the number of contracts on orders. This is the only kin
 ### Example
 
 * Api Key Authentication (cookie):
+
 ```python
 import time
 import kalshi
@@ -866,6 +1403,7 @@ Name | Type | Description  | Notes
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **201** |  |  -  |
@@ -887,6 +1425,7 @@ End-point for getting all orders for the logged in user.  The value for the user
 ### Example
 
 * Api Key Authentication (cookie):
+
 ```python
 import time
 import kalshi
@@ -988,6 +1527,7 @@ Name | Type | Description  | Notes
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** |  |  -  |
@@ -995,6 +1535,90 @@ Name | Type | Description  | Notes
 **401** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
 **403** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
 **500** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **user_remove_favorited_series**
+> user_remove_favorited_series(user_id, series_ticker)
+
+UserRemoveFavoritedSeries
+
+End-point for removing a series from the logged in user's favorites.  The value for the user_id path parameter should match the user_id value returned on the response for the last login request (POST /log_in).  The value for the series_ticker path parameter should match the ticker value of the series to be removed.
+
+### Example
+
+* Api Key Authentication (cookie):
+
+```python
+import time
+import kalshi
+from kalshi.api import user_api
+from pprint import pprint
+# Defining the host is optional and defaults to https://trading-api.kalshi.com/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kalshi.Configuration(
+    host = "https://trading-api.kalshi.com/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookie
+configuration.api_key['cookie'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookie'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with kalshi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = user_api.UserApi(api_client)
+    user_id = "user_id_example" # str | user_id should be filled with your user_id provided on log_in
+    series_ticker = "series_ticker_example" # str | series_ticker should be filled with the ticker of the series to be removed from the list
+
+    # example passing only required values which don't have defaults set
+    try:
+        # UserRemoveFavoritedSeries
+        api_instance.user_remove_favorited_series(user_id, series_ticker)
+    except kalshi.ApiException as e:
+        print("Exception when calling UserApi->user_remove_favorited_series: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **user_id** | **str**| user_id should be filled with your user_id provided on log_in |
+ **series_ticker** | **str**| series_ticker should be filled with the ticker of the series to be removed from the list |
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[cookie](../README.md#cookie)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: Not defined
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**204** | No fields are returned on the response. |  -  |
+**400** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
+**401** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
+**403** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
+**404** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
+**500** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
+**503** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1008,6 +1632,7 @@ End-point for removing a market from the logged in user's watchlist.  The value 
 ### Example
 
 * Api Key Authentication (cookie):
+
 ```python
 import time
 import kalshi
@@ -1068,6 +1693,7 @@ void (empty response body)
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **204** | No fields are returned on the response. |  -  |
@@ -1090,6 +1716,7 @@ End-point for getting all trades for the logged in user.  The value for the user
 ### Example
 
 * Api Key Authentication (cookie):
+
 ```python
 import time
 import kalshi
@@ -1179,6 +1806,7 @@ Name | Type | Description  | Notes
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** |  |  -  |

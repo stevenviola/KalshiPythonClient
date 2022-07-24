@@ -16,7 +16,9 @@ Name | Type | Description | Notes
 **last_update_op** | **str** |  | [optional] 
 **maker_fill_count** | **int** |  | [optional] 
 **market_id** | **str** |  | [optional] 
+**order_action** | **str** |  | [optional] 
 **order_id** | **str** |  | [optional] 
+**order_type** | **str** |  | [optional] 
 **place_count** | **int** |  | [optional] 
 **price** | **int** |  | [optional] 
 **queue_position** | **int** |  | [optional] 
@@ -26,6 +28,7 @@ Name | Type | Description | Notes
 **taker_fill_cost** | **int** |  | [optional] 
 **taker_fill_count** | **int** |  | [optional] 
 **user_id** | **str** |  | [optional] 
+**user_side** | **str** |  | [optional] 
 **any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

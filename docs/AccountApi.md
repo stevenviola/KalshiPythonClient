@@ -4,15 +4,16 @@ All URIs are relative to *https://trading-api.kalshi.com/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**change_subscription**](AccountApi.md#change_subscription) | **PUT** /users/{user_id}/subscribe | ChangeSubscription
+[**change_subscription**](AccountApi.md#change_subscription) | **PATCH** /users/{user_id}/subscribe | ChangeSubscription
 [**get_notification_preferences**](AccountApi.md#get_notification_preferences) | **GET** /users/{user_id}/notifications/preferences | GetNotificationPreferences
 [**notification_mark_read**](AccountApi.md#notification_mark_read) | **PUT** /users/{user_id}/notifications/{notification_id}/read | NotificationMarkRead
 [**user_get_account_history**](AccountApi.md#user_get_account_history) | **GET** /users/{user_id}/account/history | UserGetAccountHistory
 [**user_get_notifications**](AccountApi.md#user_get_notifications) | **GET** /users/{user_id}/notifications | UserGetNotifications
+[**user_get_profits_and_losses**](AccountApi.md#user_get_profits_and_losses) | **GET** /users/{user_id}/account/pnl | UserGetProfitsAndLosses
 
 
 # **change_subscription**
-> change_subscription(user_id)
+> ChangeSubscriptionResponse change_subscription(user_id)
 
 ChangeSubscription
 
@@ -21,10 +22,12 @@ End-point for changing e-mail subscription mode for the current user.  This end-
 ### Example
 
 * Api Key Authentication (cookie):
+
 ```python
 import time
 import kalshi
 from kalshi.api import account_api
+from kalshi.model.change_subscription_response import ChangeSubscriptionResponse
 from kalshi.model.change_subscription_request import ChangeSubscriptionRequest
 from pprint import pprint
 # Defining the host is optional and defaults to https://trading-api.kalshi.com/v1
@@ -50,13 +53,15 @@ with kalshi.ApiClient(configuration) as api_client:
     api_instance = account_api.AccountApi(api_client)
     user_id = "user_id_example" # str | Should be filled with your user_id provided on log_in
     change_subscription_request = ChangeSubscriptionRequest(
+        push_preferences=True,
         subscription_level="subscription_level_example",
     ) # ChangeSubscriptionRequest | Change subscription data (optional)
 
     # example passing only required values which don't have defaults set
     try:
         # ChangeSubscription
-        api_instance.change_subscription(user_id)
+        api_response = api_instance.change_subscription(user_id)
+        pprint(api_response)
     except kalshi.ApiException as e:
         print("Exception when calling AccountApi->change_subscription: %s\n" % e)
 
@@ -64,7 +69,8 @@ with kalshi.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # ChangeSubscription
-        api_instance.change_subscription(user_id, change_subscription_request=change_subscription_request)
+        api_response = api_instance.change_subscription(user_id, change_subscription_request=change_subscription_request)
+        pprint(api_response)
     except kalshi.ApiException as e:
         print("Exception when calling AccountApi->change_subscription: %s\n" % e)
 ```
@@ -79,7 +85,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+[**ChangeSubscriptionResponse**](ChangeSubscriptionResponse.md)
 
 ### Authorization
 
@@ -88,13 +94,14 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: Not defined
+ - **Accept**: application/json
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**204** | No fields are returned on the response. |  -  |
+**200** |  |  -  |
 **400** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
 **401** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
 **403** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
@@ -112,6 +119,7 @@ End-point for getting e-mail subscription mode for the current user.  The value 
 ### Example
 
 * Api Key Authentication (cookie):
+
 ```python
 import time
 import kalshi
@@ -172,6 +180,7 @@ Name | Type | Description  | Notes
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** |  |  -  |
@@ -192,6 +201,7 @@ End-point for marking a notification as read.  The value for the user_id path pa
 ### Example
 
 * Api Key Authentication (cookie):
+
 ```python
 import time
 import kalshi
@@ -252,6 +262,7 @@ void (empty response body)
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **204** | No fields are returned on the response. |  -  |
@@ -272,6 +283,7 @@ End-point for getting the logged in user's important past actions and events rel
 ### Example
 
 * Api Key Authentication (cookie):
+
 ```python
 import time
 import kalshi
@@ -300,12 +312,15 @@ with kalshi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = account_api.AccountApi(api_client)
     user_id = "user_id_example" # str | This parameter should be filled with your user_id provided on log_in
-    should_return_deposits = True # bool | If true the response should include deposit entries (optional)
-    should_return_withdrawals = True # bool | If true the response should include withdrawal entries (optional)
-    should_return_orders = True # bool | If true the response should include order entries (optional)
-    should_return_settlements = True # bool | If true the response should include settlement entries (optional)
-    should_return_trades = True # bool | If true the response should include trade entries (optional)
-    limit = 1 # int | Restricts the response to a return the first \"limit\" amount of acct history items (optional)
+    deposits = True # bool | If true the response should include deposit entries (optional)
+    withdrawals = True # bool | If true the response should include withdrawal entries (optional)
+    orders = True # bool | If true the response should include order entries (optional)
+    settlements = True # bool | If true the response should include settlement entries (optional)
+    trades = True # bool | If true the response should include trade entries (optional)
+    credits = True # bool | If true the response should include credit entries (optional)
+    limit = 1 # int | Restricts the response to a return the first \"limit\" amount of acct history items. Note if you specify a limit, you cannot specify a PageSize or PageNumber (optional)
+    page_size = 1 # int | Parameter to specify the number of results per page. (optional)
+    page_number = 1 # int | Parameter to specify which page of the results should be retrieved (optional)
 
     # example passing only required values which don't have defaults set
     try:
@@ -319,7 +334,7 @@ with kalshi.ApiClient(configuration) as api_client:
     # and optional values
     try:
         # UserGetAccountHistory
-        api_response = api_instance.user_get_account_history(user_id, should_return_deposits=should_return_deposits, should_return_withdrawals=should_return_withdrawals, should_return_orders=should_return_orders, should_return_settlements=should_return_settlements, should_return_trades=should_return_trades, limit=limit)
+        api_response = api_instance.user_get_account_history(user_id, deposits=deposits, withdrawals=withdrawals, orders=orders, settlements=settlements, trades=trades, credits=credits, limit=limit, page_size=page_size, page_number=page_number)
         pprint(api_response)
     except kalshi.ApiException as e:
         print("Exception when calling AccountApi->user_get_account_history: %s\n" % e)
@@ -331,12 +346,15 @@ with kalshi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **user_id** | **str**| This parameter should be filled with your user_id provided on log_in |
- **should_return_deposits** | **bool**| If true the response should include deposit entries | [optional]
- **should_return_withdrawals** | **bool**| If true the response should include withdrawal entries | [optional]
- **should_return_orders** | **bool**| If true the response should include order entries | [optional]
- **should_return_settlements** | **bool**| If true the response should include settlement entries | [optional]
- **should_return_trades** | **bool**| If true the response should include trade entries | [optional]
- **limit** | **int**| Restricts the response to a return the first \&quot;limit\&quot; amount of acct history items | [optional]
+ **deposits** | **bool**| If true the response should include deposit entries | [optional]
+ **withdrawals** | **bool**| If true the response should include withdrawal entries | [optional]
+ **orders** | **bool**| If true the response should include order entries | [optional]
+ **settlements** | **bool**| If true the response should include settlement entries | [optional]
+ **trades** | **bool**| If true the response should include trade entries | [optional]
+ **credits** | **bool**| If true the response should include credit entries | [optional]
+ **limit** | **int**| Restricts the response to a return the first \&quot;limit\&quot; amount of acct history items. Note if you specify a limit, you cannot specify a PageSize or PageNumber | [optional]
+ **page_size** | **int**| Parameter to specify the number of results per page. | [optional]
+ **page_number** | **int**| Parameter to specify which page of the results should be retrieved | [optional]
 
 ### Return type
 
@@ -353,6 +371,7 @@ Name | Type | Description  | Notes
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** |  |  -  |
@@ -373,6 +392,7 @@ End-point for getting notifications for the current logged in user.  The value f
 ### Example
 
 * Api Key Authentication (cookie):
+
 ```python
 import time
 import kalshi
@@ -437,11 +457,106 @@ Name | Type | Description  | Notes
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** |  |  -  |
 **400** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
 **401** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
+**403** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
+**500** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **user_get_profits_and_losses**
+> UserGetProfitsAndLossesResponse user_get_profits_and_losses(user_id)
+
+UserGetProfitsAndLosses
+
+This end point returns profits, losses, and market transactions between two dates
+
+### Example
+
+* Api Key Authentication (cookie):
+
+```python
+import time
+import kalshi
+from kalshi.api import account_api
+from kalshi.model.user_get_profits_and_losses_response import UserGetProfitsAndLossesResponse
+from pprint import pprint
+# Defining the host is optional and defaults to https://trading-api.kalshi.com/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = kalshi.Configuration(
+    host = "https://trading-api.kalshi.com/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: cookie
+configuration.api_key['cookie'] = 'YOUR_API_KEY'
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['cookie'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+with kalshi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = account_api.AccountApi(api_client)
+    user_id = "user_id_example" # str | This parameter should be filled with your user_id provided on log_in
+    start_ts = 1 # int | Start time of pnl period, represented as the number of seconds since Unix epoch (optional)
+    end_ts = 1 # int | End time of pnl period, represented as the number of seconds since Unix epoch (optional)
+
+    # example passing only required values which don't have defaults set
+    try:
+        # UserGetProfitsAndLosses
+        api_response = api_instance.user_get_profits_and_losses(user_id)
+        pprint(api_response)
+    except kalshi.ApiException as e:
+        print("Exception when calling AccountApi->user_get_profits_and_losses: %s\n" % e)
+
+    # example passing only required values which don't have defaults set
+    # and optional values
+    try:
+        # UserGetProfitsAndLosses
+        api_response = api_instance.user_get_profits_and_losses(user_id, start_ts=start_ts, end_ts=end_ts)
+        pprint(api_response)
+    except kalshi.ApiException as e:
+        print("Exception when calling AccountApi->user_get_profits_and_losses: %s\n" % e)
+```
+
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **user_id** | **str**| This parameter should be filled with your user_id provided on log_in |
+ **start_ts** | **int**| Start time of pnl period, represented as the number of seconds since Unix epoch | [optional]
+ **end_ts** | **int**| End time of pnl period, represented as the number of seconds since Unix epoch | [optional]
+
+### Return type
+
+[**UserGetProfitsAndLossesResponse**](UserGetProfitsAndLossesResponse.md)
+
+### Authorization
+
+[cookie](../README.md#cookie)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** |  |  -  |
+**400** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
 **403** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
 **500** | JSONError is a generic structure for API error responses. |  * code -  <br>  * details -  <br>  * message -  <br>  * service -  <br>  |
 

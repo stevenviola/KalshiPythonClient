@@ -4,6 +4,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**credit** | [**CreditHistory**](CreditHistory.md) |  | [optional] 
 **deposit** | [**DepositHistory**](DepositHistory.md) |  | [optional] 
 **order** | [**OrderHistory**](OrderHistory.md) |  | [optional] 
 **settlement** | [**SettlementHistory**](SettlementHistory.md) |  | [optional] 

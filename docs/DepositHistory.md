@@ -9,6 +9,8 @@ Name | Type | Description | Notes
 **created_at** | **datetime** |  | [optional] 
 **deposit_type** | **str** |  | [optional] 
 **fee** | **int** |  | [optional] 
+**immediate_amount** | **int** |  | [optional] 
+**immediate_status** | **str** |  | [optional] 
 **returned_amount** | **int** |  | [optional] 
 **status** | **str** |  | [optional] 
 **updated_at** | **datetime** |  | [optional] 

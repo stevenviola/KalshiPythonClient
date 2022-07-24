@@ -16,6 +16,7 @@ End-point for getting data about a ranged market
 
 ### Example
 
+
 ```python
 import time
 import kalshi
@@ -66,6 +67,7 @@ No authorization required
 
 
 ### HTTP response details
+
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | GetRangedMarketResponse |  -  |
