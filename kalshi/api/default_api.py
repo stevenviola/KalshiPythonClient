@@ -48,6 +48,7 @@ class DefaultApi(object):
             },
             params_map={
                 'all': [
+                    'status',
                 ],
                 'required': [],
                 'nullable': [
@@ -63,10 +64,14 @@ class DefaultApi(object):
                 'allowed_values': {
                 },
                 'openapi_types': {
+                    'status':
+                        (str,),
                 },
                 'attribute_map': {
+                    'status': 'status',
                 },
                 'location_map': {
+                    'status': 'query',
                 },
                 'collection_format_map': {
                 }
@@ -241,6 +246,7 @@ class DefaultApi(object):
 
 
         Keyword Args:
+            status (str): If provided, filter events by status. [optional]
             _return_http_data_only (bool): response data without head status
                 code and headers. Default is True.
             _preload_content (bool): if False, the urllib3.HTTPResponse object

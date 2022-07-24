@@ -37,11 +37,13 @@ configuration = kalshi.Configuration(
 with kalshi.ApiClient() as api_client:
     # Create an instance of the API class
     api_instance = default_api.DefaultApi(api_client)
+    status = "status_example" # str | If provided, filter events by status (optional)
 
-    # example, this endpoint has no required or optional parameters
+    # example passing only required values which don't have defaults set
+    # and optional values
     try:
         # GetEventsCached
-        api_response = api_instance.get_events_cached()
+        api_response = api_instance.get_events_cached(status=status)
         pprint(api_response)
     except kalshi.ApiException as e:
         print("Exception when calling DefaultApi->get_events_cached: %s\n" % e)
@@ -49,7 +51,10 @@ with kalshi.ApiClient() as api_client:
 
 
 ### Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **status** | **str**| If provided, filter events by status | [optional]
 
 ### Return type
 

@@ -420,6 +420,17 @@
       "get": {
         "description": "End-point for getting data about all events with data that is cached and so slightly lagged.",
         "operationId": "GetEventsCached",
+        "parameters": [
+          {
+            "description": "If provided, filter events by status",
+            "in": "query",
+            "name": "status",
+            "x-go-name": "Status",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "GetEventsResponse",
